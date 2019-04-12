@@ -16,6 +16,7 @@ public class Pong extends JFrame {
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
+		// adds panel to the frame
 		add(new PongPanel());
 				
 	}

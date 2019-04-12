@@ -7,9 +7,11 @@ import java.awt.event.KeyEvent;
 
 
 public class PongPanel extends JPanel implements ActionListener, KeyListener {
+	
+	private final static Color PANEL_COLOR = Color.black;
 
 	public PongPanel() {
-		setBackground(Color.BLACK);
+		setBackground(PANEL_COLOR);
 	}
 	
 	
