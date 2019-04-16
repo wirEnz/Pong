@@ -3,6 +3,7 @@ import javax.swing.JFrame;
 public class Pong extends JFrame {
 	
 	// private final static, cannot be changed once application starts
+	// this sets the title, width and height of the application window
 	private final static String WINDOW_TITLE = "Pong";
 	private final static int WINDOW_WIDTH = 800;
 	private final static int WINDOW_HEIGHT = 600;

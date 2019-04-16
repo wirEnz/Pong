@@ -1,9 +1,14 @@
+import java.awt.Color;
 
 public class Sprite {
+	
+	
 	
 	private int xPosition, yPosition;
 	private int xVelocity, yVelocity;
 	private int width, height;
+	private int initialXPosition, initialYPosition;
+	private Color colour;
 	
 	// getter methods
 	public int getXPostion() {return xPosition;}
@@ -14,6 +19,8 @@ public class Sprite {
 	
 	public int getWidth() {return width;}
 	public int getHeight() {return height;}
+	
+	public Color getColour() {return colour;}
 	
 	// setter methods
 	 public void setXPosition(int newX) {
@@ -43,6 +50,20 @@ public class Sprite {
 	
 	public void setheight(int newHeight) {
 		height = newHeight;
+	}
+	
+	public void setColour(Color newColour) {
+		colour = newColour;
+	}
+	
+	public void setInitialPosition(int initialX, int initialY) {
+		initialXPosition = initialX;
+		initialYPosition = initialY;
+	}
+	
+	public void resetInitialPostion() {
+		setXPosition(initialXPosition);
+		setYPosition(initialYPosition);
 	}
 	
 	// overloading methods
