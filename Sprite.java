@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Rectangle;
 
 public class Sprite {
 	
@@ -21,6 +22,7 @@ public class Sprite {
 	public int getHeight() {return height;}
 	
 	public Color getColour() {return colour;}
+	public Rectangle getRectangle() {return new Rectangle(getXPostion(), getYPostion(), getWidth(), getHeight());}
 	
 	// setter methods
 	 public void setXPosition(int newX) {
