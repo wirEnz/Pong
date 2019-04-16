@@ -20,9 +20,11 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	boolean gameInitialised = false;
 	
 	Ball ball;
+	Paddle paddle;
 	
 	public void createObjects() {
 		ball = new Ball(getWidth(), getHeight());
+		paddle = new Paddle(getWidth(), getHeight());
 	}
 	
 	

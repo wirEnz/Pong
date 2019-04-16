@@ -1,4 +1,6 @@
 
-public enum Player {
+public enum Player  {
+	one,
+	two
 
 }
