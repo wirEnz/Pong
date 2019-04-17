@@ -4,7 +4,7 @@ public class Ball extends Sprite {
 	
 	private final static int ballWidth = 25;
 	private final static int ballHeight = 25;
-	private final static Color ballColour = Color.white;
+	private final static Color ballColour = Color.WHITE;
 
 	public Ball(int panelWidth, int panelHeight) {
 		setWidth(ballWidth);

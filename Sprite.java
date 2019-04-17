@@ -9,7 +9,7 @@ public class Sprite {
 	private int xVelocity, yVelocity;
 	private int width, height;
 	private int initialXPosition, initialYPosition;
-	private Color colour;
+	private Color colour = Color.WHITE;
 	
 	// getter methods
 	public int getXPostion() {return xPosition;}
