@@ -14,11 +14,12 @@ import java.awt.BasicStroke;
 
 public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	
+	
+	
 	// sets background to black, final, cannot be changed after application runs.	
 	private final static Color PANEL_COLOR = Color.black;
 	private final static int TIMER_DELAY = 5;
-	boolean gameInitialised = false;
-	
+	private final static int BALL_MOVEMENT_SPEED = 2;
 	
 	// Ball object
 	Ball ball;				
@@ -37,7 +38,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	
 	public void paintSprit(Graphics g, Sprite sprite) {
 		g.setColor(sprite.getColour());
-		g.fillRect(sprite.getXPostion(), sprite.getYPostion(), sprite.getWidth(), sprite.getHeight());
+		g.fillRect(sprite.getXPosition(), sprite.getYPosition(), sprite.getWidth(), sprite.getHeight());
 		
 	}
 	
@@ -49,18 +50,38 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 		setBackground(PANEL_COLOR);
 		Timer timer = new Timer(TIMER_DELAY, this);
 		timer.start();
+		addKeyListener(this);
+		setFocusable(true);
 	}
 	
 	
 	@Override
 	public void keyPressed(KeyEvent event) {
-		// TODO Auto-generated method stub
+		// moves player_two paddle up and down		
+		if (event.getKeyCode() == KeyEvent.VK_W) {
+			player_one.setYVelocity(-1);
+		} else if (event.getKeyCode() == KeyEvent.VK_S) {
+			player_one.setYVelocity(1);
+		}
+		// moves player_one paddle up and down
+		if (event.getKeyCode() == KeyEvent.VK_UP) {
+			player_two.setYVelocity(-1);
+		} else if (event.getKeyCode() == KeyEvent.VK_DOWN) {
+			player_two.setYVelocity(1);
+		}
 		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent event) {
-		// TODO Auto-generated method stub
+		// stops player_two paddle once key is released 
+		if (event.getKeyCode() == KeyEvent.VK_UP || event.getKeyCode() == KeyEvent.VK_DOWN ) {
+			player_two.setYVelocity(0);
+		}
+		// stops player_one paddle once key is released 
+		if (event.getKeyCode() == KeyEvent.VK_W || event.getKeyCode() == KeyEvent.VK_S ) {
+			player_one.setYVelocity(0);
+		}
 		
 	}
 
@@ -81,26 +102,60 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	// my methods 
 	
 	private void update() {
-		/*if(!gameInitialised) {
-            createObjects();
-            gameInitialised = true;
-       }*/
-		
-		
 	switch(gameState) {
-       case Initialising: {
-           createObjects();
-           gameState = GameState.Playing;
-           break;
-       }
-       case Playing: {
-           break;
-       }
-       case GameOver: {
-           break;
-       }
-   }
+	      case Initialising: {
+	          createObjects();
+	          gameState = GameState.Playing;
+	          ball.setXVelocity(BALL_MOVEMENT_SPEED);
+	          ball.setYVelocity(BALL_MOVEMENT_SPEED);
+	          break;
+	      }
+	      case Playing: {
+	    	 // move player paddles
+	    	 moveObject(player_one);
+	    	 moveObject(player_two);
+	    	 // move ball 
+	    	 moveObject(ball);
+	    	 // check for wall bounce
+	    	 checkWallBounce();
+	    	 break;
+	      }
+	      case GameOver: {
+	          break;
+	      }
+	  }
 }
+	
+	private void checkWallBounce() {
+		if (ball.getXPosition() <= 0) {
+			ball.setXVelocity(-ball.getXVelocity());
+			// hit the left side of window
+			resetBall();
+		}else if (ball.getXPosition() >= getWidth() - ball.getWidth()) {
+			 ball.setXVelocity(-ball.getXVelocity());
+			// hit right side of window
+			resetBall();
+		}
+		if (ball.getYPosition() <= 0 || ball.getYPosition() >= getHeight() - ball.getHeight()) {
+			// hit top or bottom of window
+			ball.setYVelocity(-ball.getYVelocity());
+		}
+	
+	}
+	
+	// method resets ball to center
+	private void resetBall() {
+		ball.resetInitialPostion();
+	}
+
+
+	private void moveObject(Sprite object) {
+		// increases the x and y position of given object by the x and y velocity
+		object.setXPosition(object.getXPosition() + object.getXVelocity(),getWidth());
+		object.setYPosition(object.getYPosition() + object.getYVelocity(),getHeight());
+	 }
+
+
 	
 	@Override
 	public void paintComponent(Graphics g) {

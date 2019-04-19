@@ -12,8 +12,8 @@ public class Sprite {
 	private Color colour = Color.WHITE;
 	
 	// getter methods
-	public int getXPostion() {return xPosition;}
-	public int getYPostion() {return yPosition;}
+	public int getXPosition() {return xPosition;}
+	public int getYPosition() {return yPosition;}
 	
 	public int getXVelocity() {return xVelocity;}
 	public int getYVelocity() {return yVelocity;}
@@ -22,7 +22,7 @@ public class Sprite {
 	public int getHeight() {return height;}
 	
 	public Color getColour() {return colour;}
-	public Rectangle getRectangle() {return new Rectangle(getXPostion(), getYPostion(), getWidth(), getHeight());}
+	public Rectangle getRectangle() {return new Rectangle(getXPosition(), getYPosition(), getWidth(), getHeight());}
 	
 	// setter methods
 	 public void setXPosition(int newX) {
@@ -38,13 +38,11 @@ public class Sprite {
 	
 		
 	
-	public void setXvelocity(int newXVelocity) {
-		xVelocity = newXVelocity;
+	public void setYVelocity(int newXVelocity) {
+		yVelocity = newXVelocity;
 	}
 	
-	public void setYvelocity(int newYVelocity) {
-		yVelocity = newYVelocity;
-	}
+	
 	
 	public void setWidth(int newWidth) {
 		width = newWidth;
@@ -69,7 +67,7 @@ public class Sprite {
 	}
 	
 	// overloading methods
-	public void setXPostion(int newX, int panelWidth) {
+	public void setXPosition(int newX, int panelWidth) {
 		xPosition = newX;
 		
 		if (xPosition < 0) {
@@ -79,7 +77,7 @@ public class Sprite {
 		}
 	}
 	
-	public void setyPostion(int newY, int panelHeight) {
+	public void setYPosition(int newY, int panelHeight) {
 		yPosition = newY;
 		if (yPosition < 0) {
 			yPosition = 0;
