@@ -20,6 +20,9 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	private final static Color PANEL_COLOR = Color.black;
 	private final static int TIMER_DELAY = 5;
 	private final static int BALL_MOVEMENT_SPEED = 2;
+	private final static int POINTS_TO_WIN = 3;
+	int player1Score = 0, player2Score = 0;
+	Player gameWinner;
 	
 	// Ball object
 	Ball ball;				
@@ -119,6 +122,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	    	 // check for wall bounce
 	    	 checkWallBounce();
 	    	 checkPaddleBounce();
+	    	 checkWin();
 	    	 break;
 	      }
 	      case GameOver: {
@@ -128,6 +132,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 }
 	
 	private void checkPaddleBounce() {
+		// this is saying if the ball is moving, by seeing if velocity is not 0(not moving) and checks if the ball
+		// Intersects with paddle, if it does  velocity is switched(ball movement)
 		if (ball.getXVelocity() < 0 && ball.getRectangle().intersects(player_one.getRectangle())) {
 			ball.setXVelocity(BALL_MOVEMENT_SPEED);
 		}
@@ -142,10 +148,12 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 		if (ball.getXPosition() <= 0) {
 			ball.setXVelocity(-ball.getXVelocity());
 			// hit the left side of window
+			addScore(Player.one);
 			resetBall();
 		}else if (ball.getXPosition() >= getWidth() - ball.getWidth()) {
 			 ball.setXVelocity(-ball.getXVelocity());
 			// hit right side of window
+			addScore(Player.two);
 			resetBall();
 		}
 		if (ball.getYPosition() <= 0 || ball.getYPosition() >= getHeight() - ball.getHeight()) {
@@ -190,6 +198,25 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			g2d.setPaint(Color.WHITE);
 			g2d.drawLine(getWidth() / 2, 0, getWidth() / 2, getHeight());
 			g2d.dispose();
+	}
+	
+	private void addScore(Player player) {
+		if (player == Player.one) {
+			player1Score++;
+		}else if (player == Player.two) {
+			player2Score++;
+		}
+	}
+	
+	private void checkWin() {
+		if (player1Score >= POINTS_TO_WIN) {
+			gameWinner = Player.one;
+			gameState = GameState.GameOver;
+		}else if (player2Score >= POINTS_TO_WIN) {
+			gameWinner = Player.two;
+			gameState = GameState.GameOver;
+		}
+		
 	}
 
 	
