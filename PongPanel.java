@@ -156,12 +156,12 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 		if (ball.getXPosition() <= 0) {
 			ball.setXVelocity(-ball.getXVelocity());
 			// hit the left side of window
-			addScore(Player.one);
+			addScore(Player.two);
 			resetBall();
 		}else if (ball.getXPosition() >= getWidth() - ball.getWidth()) {
 			 ball.setXVelocity(-ball.getXVelocity());
 			// hit right side of window
-			addScore(Player.two);
+			addScore(Player.one);
 			resetBall();
 		}
 		if (ball.getYPosition() <= 0 || ball.getYPosition() >= getHeight() - ball.getHeight()) {
